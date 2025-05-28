@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINNER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(220, 20, 60, 0.2), transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.2), transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 24px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .winner-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc143c, #ff0000);
+            color: #fff;
+            padding: 6px 20px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .big-t {
+            font-size: 80px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #dc143c 0%, #ff0000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(220, 20, 60, 0.4);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.4)); }
+            to { filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.6)); }
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .value-text {
+            font-size: 24px;
+            color: #dc143c;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            margin-bottom: 32px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #dc143c 0%, #ff0000 100%);
+            color: #fff;
+            padding: 20px 60px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 18px;
+            display: inline-block;
+            width: 100%;
+            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(220, 20, 60, 0.6);
+        }
+
+        .spots-left {
+            margin-top: 24px;
+            padding: 12px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            font-size: 14px;
+            color: #ff6b6b;
+        }
+
+        .spots-number {
+            font-weight: 700;
+            color: #ff0000;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .payment-icon {
+            width: 20px;
+            height: 20px;
+            background: #dc143c;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .disclaimer {
+            margin-top: 24px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="winner-badge">Selected</div>
+            
+            <h1>Congratulations!</h1>
+            <div class="value-text">$800+ EARNING POTENTIAL</div>
+            <p class="subtitle">Test apps, games & surveys for money</p>
+
+            <a href="#" class="cta-button">
+                START TESTING
+            </a>
+
+            <div class="payment-method">
+                <div class="payment-icon">T</div>
+                <span>TesterUp Member Access</span>
+            </div>
+
+            <div class="spots-left">
+                Only <span class="spots-number">2</span> spots remaining today
+            </div>
+
+            <p class="disclaimer">
+                Earnings vary. 18+. Not affiliated with TesterUp platform.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Get subdirectory from URL path
+        const path = window.location.pathname;
+        const source = path.split('/')[1] || 'testerup';
+        
+        // Build tracking link with dynamic source
+        const trackingLink = `https://getrewarrds.com/aff_c?offer_id=1433&aff_id=1497&source=${source}`;
+        
+        // Update button href when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.cta-button').href = trackingLink;
+        });
+    </script>
+
+</body></html>
